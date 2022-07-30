@@ -1,0 +1,263 @@
+.miniCardElement {
+    height: 190px;
+    margin: 40px 16px;
+    margin-top: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.miniCart {
+    position: absolute;
+    top: 78px;
+    right: 72px;
+    background-color: #fff;
+    z-index: 9;
+    border: 1px solid red;
+}
+
+.container-mini {
+    width: 325px;
+    position: relative;
+}
+
+.hiddenMiniCart {
+    position: absolute;
+    top: 78px;
+    right: 72px;
+    background-color: #fff;
+    height: 0;
+    display: none;
+    overflow: hidden;
+}
+
+.miniCartImgContainer {
+    width: 121px;
+    height: 190px;
+    overflow: hidden;
+}
+
+.miniAdd_product {
+    display: flex;
+    flex-direction: column;
+    height: 190px;
+    margin-right: 8px;
+    width: 24px;
+    position: relative;
+}
+
+.numberItems {
+    width: 100%;
+    margin-top: 88px;
+    font-size: 15px;
+}
+
+.mbtn1 {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #1D1F22;
+    height: 24px;
+}
+
+.mbtn2 {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #1D1F22;
+    height: 24px;
+}
+
+.miniCardDetails {
+    height: 100%;
+    width: 136px;
+}
+
+.miniCard_title {
+    font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: 300;
+font-size: 16px;
+line-height: 27px;
+color: #1D1F22;
+text-align: start;
+margin: 3px 0;
+}
+
+.miniCard_name {
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 27px;
+    color: #1D1F22;
+    text-align: start;
+    margin: 2px 0;
+}
+
+.miniCard_price {
+    height: 26px;
+font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 160%;
+text-align: start;
+color: #1D1F22;
+margin: 2px 0;
+}
+
+.miniCard_size {
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    color: #1D1F22;
+    text-align: start;
+    margin: 0;
+}
+
+.miniContainer_sizes {
+    display: flex;
+}
+
+.miniChosenSize {
+    background: #1D1F22;
+    width: 14px;
+    padding: 5px;
+    margin: 0;
+    margin-right: 4px;
+    color: #fff;
+    font-size: 8px;
+    height: 14px;
+}
+
+.miniProductSize {
+    background: #fff;
+    width: 14px;
+    padding: 5px;
+    margin: 0;
+    margin-right: 4px;
+    color: #1D1F22;
+    font-size: 8px;
+    height: 16px;
+    border: 1px solid #1D1F22;
+}
+
+.minChosenColor {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+    border: 1px solid #5ECE7B;
+}
+
+.miniColor {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+.miniProductcolor {
+    width: 20px;
+    height: 20px;
+}
+
+.miniContainer_colors {
+    display: flex;
+}
+
+.miniCart-bigTitle {
+font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+text-align: start;
+color: #1D1F22;
+margin: 32px 16px;
+}
+
+.miniCart-bigTitle span {
+    font-weight: 400;
+}
+
+.Total {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.titleTotal {
+  position: absolute;
+  right: 16px;
+}
+
+.Total h3 {
+font-family: 'Roboto', sans-serif;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+color: #1D1F22;
+margin-left: 16px;
+}
+
+.buttonsCheckout button {
+    width: 140px;
+    height: 43px;
+    margin-bottom: 32px;
+    border-radius: 0;
+}
+
+.viewBag {
+    margin-right: 12px;
+    background-color: #fff;
+    border: 1px solid #1D1F22;
+    color: #1D1F22;
+}
+
+.checkout-btn {
+    border: none;
+    color: #fff;
+    background-color: #5ECE7B;
+}
+
+.miniCartBottom {
+    bottom: 0;
+    left: 17px;
+}
+
+.articles-miniCart {
+    max-height: 435px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    /* border-radius: 2px; */
+  border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    width: 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    border-radius: 4px;
+    width: 10px;
+  }
+
+  .cartHover {
+    overflow: hidden;
+  }

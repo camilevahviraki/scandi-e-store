@@ -1,0 +1,78 @@
+.nav {
+    display: flex;
+    align-items: center;
+    margin-left: 115px;
+}
+
+.nav button {
+    margin-right: 30px;
+    padding-left: 7px;
+    padding-right: 7px;
+    height: 78px;
+font-family: 'Raleway';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+text-transform: uppercase;
+background-color: transparent;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    border-bottom: 1px solid black;
+    height: 78px;
+    z-index: 10;
+}
+
+.logo {
+    position: absolute;
+    left: calc(50vw - 20px);
+}
+
+.cardEmpty {
+    position: absolute;
+    right: 115px;
+}
+
+.activeLink {
+    color: #5ECE7B;
+    border-bottom: 1px solid #5ECE7B;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.nonActiveLink {
+    border: none;
+    color: #1D1F22;
+}
+
+.currencies {
+    position: absolute;
+    right: 143px;
+    border: none;
+    background-color: white;
+    font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+}
+
+.cartLength {
+    position: absolute;
+    right: 98px;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    padding: 1px;
+    font-weight: 700;
+}
