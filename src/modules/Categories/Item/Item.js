@@ -15,7 +15,7 @@ export default class Item extends Component {
           <img className="Item-Img" src={item.gallery[0]} alt="" />
         </Link>
         </div>
-        <h3 className="artcicleName">{item.name}</h3>
+        <h3 className="artcicleName">{item.brand}{' '}{item.name}</h3>
         <p className="artciclePrice">
           {item.prices[this.props.currencieId].currency.symbol}
           {item.prices[this.props.currencieId].amount}
