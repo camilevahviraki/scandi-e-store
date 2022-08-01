@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { changeImage, changeNumberInCart } from '../../Redux/cart/cart';
+import { changeImage, changeNumberInCart, addTocard } from '../../Redux/cart/cart';
 import '../../styles/miniCart.css';
-
+import scrollUp from '../../icons/scroll-btn.png';
 
 class MiniCart extends Component {
   constructor(props) {
@@ -12,10 +12,23 @@ class MiniCart extends Component {
       imageShown: 0,
       imagesDisplay: [],
       currencies: ['$', '£', 'A$', '¥', '₽'],
+      hoverCart: false,
+      visible: {
+        downLimit: this.props.cart.length - 2,
+        upLimit: this.props.cart.length,
+      },
     };
+    this.myRef = createRef();
   }
 
-  imagesDisplay = []
+  componentDidUpdate(prevProps){
+    if(this.props.cart.length !== prevProps.cart.length){
+      this.setState({visible: {
+        upLimit: this.props.cart.length,
+        downLimit: this.props.cart.length -2,
+      }})
+    }
+  }
 
   setImageN = (arr) => {
     if (this.state.imageShown <= 0) {
@@ -51,8 +64,51 @@ class MiniCart extends Component {
     return cartTotal;
   }
 
+  setVisibleCart = (btn) => {
+    if(this.props.cart.length <= 2){
+       this.setState({ visible: {
+        downLimit: 0,
+        upLimit: this.props.cart.length,
+      }})
+    }else if(this.props.cart.length > 2){
+      if(btn === 'up-btn'){
+        if(this.state.visible.upLimit + 2 >= this.props.cart.length){
+          this.setState({visible: {
+            downLimit: this.props.cart.length - 2,
+            upLimit: this.props.cart.length,
+          }})
+        }else {
+          this.setState({visible: {
+            downLimit: this.state.visible.downLimit + 2,
+            upLimit: this.state.visible.upLimit + 2,
+          }})
+        }
+      }else if(btn=== 'down-btn'){
+        if(this.state.visible.downLimit - 2 <= 0){
+          this.setState({visible: {
+            downLimit: 0,
+            upLimit: 2,
+          }})
+        }else {
+          this.setState({visible: {
+            downLimit: this.state.visible.downLimit - 2,
+            upLimit: this.state.visible.upLimit - 2,
+          }})
+        }
+      }
+    }
+    console.log(this.state.visible)
+  }
+
+  addTocart = () => {
+     if(window.location.pathname.split('/').join('') === 'details'){
+      const item = JSON.parse(localStorage.getItem('productToCheck'));
+      this.props.addTocard(item);
+      console.log('checkout =>', item)
+     }
+  }
+
   render() {
-    console.log('My cart =>', this.props.cart);
     return (
       <div className={this.props.cartShown ? 'miniCart' : 'hiddenMiniCart'}>
         <div className="container-mini">
@@ -69,8 +125,9 @@ class MiniCart extends Component {
             onMouseLeave={() => this.setState({hoverCart: false})}
             className={this.state.hoverCart? "articles-miniCart":"articles-miniCart  cartHover"}
           >
+        
             {
-            this.props.cart.map((item, key) => {
+            this.props.cart.slice(this.state.visible.downLimit, this.state.visible.upLimit).map((item, key) => {
               let sizeProduct = [];
               let colorProduct = [];
               const newProduct = item;
@@ -80,10 +137,12 @@ class MiniCart extends Component {
                 }
                 sizeProduct = newProduct.attributes.filter((size) => size.name !== 'Color');
               }
+
               return (
                 <div
-                  key={item.id}
+                  key={item.id + key}
                   className="miniCardElement"
+                  ref={this.myRef}
                 >
                   <div className="miniCardDetails">
                     <h4 className="miniCard_title">{item.brand}</h4>
@@ -149,6 +208,22 @@ class MiniCart extends Component {
               );
             })
         }
+          <div style={this.state.hoverCart ? {display: 'flex'} : {display: 'none'}}>
+            <img
+              src={scrollUp}
+              alt=""
+              className="scrollUp"
+              onClick={()=> {this.setVisibleCart('up-btn')}}
+              style={this.state.visible.upLimit === this.props.cart.length? {display: 'none'}: {display: 'flex'}}
+            />
+            <img
+              src={scrollUp}
+              alt=""
+              className="scrollDown"
+              onClick={()=> {this.setVisibleCart('down-btn')}}
+              style={this.state.visible.downLimit === 0? {display: 'none'}: {display: 'flex'}}
+            />
+          </div>
           </div>
 
           <div className="miniCartBottom">
@@ -167,7 +242,10 @@ class MiniCart extends Component {
               >
                 VIEW BAG
               </Link>
-              <button className="checkout-btn">
+              <button
+                onClick={() => this.addTocart()}
+                className="checkout-btn"
+              >
                 CHECK OUT
               </button>
             </div>
@@ -183,6 +261,7 @@ const mapStateToProps = (state) => ({ cart: state.cartReducer });
 const mapDispatchToProps = (dispatch) => ({
   changeImage: (btn, item) => dispatch(changeImage(btn, item)),
   changeNumberInCart: (btn, item) => dispatch(changeNumberInCart(btn, item)),
+  addTocard: (item) => dispatch(addTocard(item)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MiniCart);
