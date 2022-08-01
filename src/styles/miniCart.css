@@ -13,7 +13,6 @@
     right: 72px;
     background-color: #fff;
     z-index: 9;
-    border: 1px solid red;
 }
 
 .container-mini {
@@ -125,30 +124,30 @@ margin: 2px 0;
 
 .miniChosenSize {
     background: #1D1F22;
-    width: 14px;
-    padding: 5px;
+    width: 16px;
+    padding: 7px 5px 3px 5px;
     margin: 0;
     margin-right: 4px;
     color: #fff;
     font-size: 8px;
-    height: 14px;
+    height: 16px;
+    text-align: center;
 }
 
 .miniProductSize {
     background: #fff;
     width: 14px;
-    padding: 5px;
+    padding: 7px 5px 3px 5px;
     margin: 0;
     margin-right: 4px;
     color: #1D1F22;
     font-size: 8px;
-    height: 16px;
-    border: 1px solid #1D1F22;
+    height: 14px;
+    border: 1px solid #1D1F22;text-align: center;
+
 }
 
 .minChosenColor {
-    width: 22px;
-    height: 22px;
     margin-right: 8px;
     border: 1px solid #5ECE7B;
 }
@@ -175,7 +174,7 @@ font-weight: 700;
 font-size: 16px;
 text-align: start;
 color: #1D1F22;
-margin: 32px 16px;
+margin: 32px 16px 0 16px;
 }
 
 .miniCart-bigTitle span {
@@ -191,6 +190,8 @@ margin: 32px 16px;
 .titleTotal {
   position: absolute;
   right: 16px;
+  font-family: 'Raleway', sans-serif !important;
+font-weight: 700 !important;
 }
 
 .Total h3 {
@@ -210,10 +211,17 @@ margin-left: 16px;
 }
 
 .viewBag {
-    margin-right: 12px;
+    margin: 0 12px 0 16px;
     background-color: #fff;
     border: 1px solid #1D1F22;
-    color: #1D1F22;
+font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+text-align: center;
+color: #1D1F22;
+text-decoration: none;
+padding: 12px 36px;
 }
 
 .checkout-btn {
@@ -228,11 +236,37 @@ margin-left: 16px;
 }
 
 .articles-miniCart {
-    max-height: 435px;
-    overflow-y: scroll;
+    /* max-height: 435px; */
+    /* overflow: hidden; */
+    /* overflow-y: scroll; */
     display: flex;
     flex-direction: column-reverse;
+    position: relative;
+    padding-top: 32px;
 }
+
+.scrollUp {
+    position: absolute;
+    top: 5px;
+    width: 40px;
+    height: 20px;
+    right: 30px;
+    filter: sepia(1);
+    -webkit-transform:rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.scrollDown {
+    position: absolute;
+    bottom: 5px;
+    width: 40px;
+    height: 20px;
+    right: 30px;
+}
+
+/* .cartHover {
+    overflow: hidden;
+  } */
 
 ::-webkit-scrollbar {
     width: 3px;
@@ -256,8 +290,4 @@ margin-left: 16px;
     background: #555;
     border-radius: 4px;
     width: 10px;
-  }
-
-  .cartHover {
-    overflow: hidden;
   }

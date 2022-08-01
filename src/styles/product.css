@@ -22,7 +22,7 @@
 .litleImg {
     width: 80px;
     height: auto;
-    margin: 16px;
+    margin: 0 16px 32px 16px;
 }
 
 .bigImgContainer {
@@ -40,7 +40,6 @@
 .sideImages {
     display: flex;
     flex-direction: column;
-    border: 1px solid red;
     width: 100px;
     margin-left: 96px;
 }
@@ -61,7 +60,6 @@
 .detailsContainer {
     width: calc(100vw * 0.203);
     margin-left: 100px;
-    border: 1px solid green;
     text-align: start;
 }
 
