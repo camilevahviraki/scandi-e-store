@@ -24,17 +24,11 @@ class Header extends Component {
     return cartlength;
   }
 
-  hideMiniCart = () => {
-    this.setState({showMiniCArt: false});
-  }
-
-  // checkLink = () => {
-  //   if(window.location.pathname.split('/').join('')=== 'cart'){
-  //     this.setState({showMiniCArt: false});
-  //   }
-  // }
-
   render() {
+
+    if(window.location.pathname.split('/').join('') === 'cart'){
+      this.props.showMiniCArt(false);
+    }
     
     return (
       <header>
