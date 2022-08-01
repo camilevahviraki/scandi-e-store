@@ -120,6 +120,7 @@ margin: 0;
     margin-right: 4px;
     background: #fff;
 border: 1px solid #1D1F22;
+text-align: center;
 }
 
 .container_colors {
@@ -166,13 +167,15 @@ border: 1px solid #1D1F22;
     margin: 0;
     margin-right: 4px;
     color: #fff;
+    text-align: center;
 }
 
 .chosenColor {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
     border: 1px solid #5ECE7B;
     padding-top: 1px;
+    margin-right: 8px;
 }
 
 .numberOfItems {
