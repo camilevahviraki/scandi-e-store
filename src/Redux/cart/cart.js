@@ -12,10 +12,9 @@ const cartReducer = (state = [], action) => {
           duplicate = [...duplicate, item];
         }
       });
-
       if (duplicate.length > 0) {
         state.forEach((item) => {
-          if (action.product.id === item.id) {
+          if (action.product.id === item.id && action.product.colorSelected === item.colorSelected && action.product.sizeSelected === item.sizeSelected) {
             item.itemsNumber += 1;
           }
           stateIfDuplicate = [...stateIfDuplicate, item];
