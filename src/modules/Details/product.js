@@ -28,7 +28,7 @@ class Product extends Component {
     if (this.props.product !== prevProps.product) {
       if (this.props.product !== null) {
         localStorage.setItem('product', JSON.stringify(this.props.product));
-        this.saveToStorage(this.props.product.product);
+        this.saveToStorage(this.props.product.product, 0, 0);
       }
     }
   }
