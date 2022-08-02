@@ -16,7 +16,6 @@ class Currencie extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <select
         name="currencies"

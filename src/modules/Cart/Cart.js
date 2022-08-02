@@ -8,12 +8,11 @@ class Cart extends Component {
     super(props);
     this.state = {
       imageShown: 0,
-      imagesDisplay: [],
       currencies: ['$', '£', 'A$', '¥', '₽'],
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.cartShown(false);
   }
 
@@ -52,13 +51,12 @@ class Cart extends Component {
   }
 
   render() {
-
     return (
       <div className="cartPage">
         <h2 className="cartTitle">CART</h2>
-        <div className="grey-line"/>
+        <div className="grey-line" />
         {
-            this.props.cart.map((item, key) => {
+            this.props.cart.map((item) => {
               let sizeProduct = [];
               let colorProduct = [];
               const newProduct = item;
@@ -67,7 +65,6 @@ class Cart extends Component {
                   colorProduct = newProduct.attributes.filter((size) => size.name === 'Color');
                 }
                 sizeProduct = newProduct.attributes.filter((size) => size.name !== 'Color');
-                console.log('cart sizes =>', sizeProduct);
               }
               return (
                 <div
@@ -88,7 +85,7 @@ class Cart extends Component {
                         <div className="container_sizes">
                           {
                             sizeProduct[0].items.map((size, key) => (
-                              <p className={item.sizeSelected === key ? 'chosenSize' : 'productSize'}>{size.value}</p>
+                              <p key={size} className={item.sizeSelected === key ? 'chosenSize' : 'productSize'}>{size.value}</p>
                             ))
                           }
                         </div>
@@ -101,7 +98,7 @@ class Cart extends Component {
                               <div className="container_colors">
                                 {
                           colorProduct[0].items.map((color, key) => (
-                            <div className={item.colorSelected === key ? 'chosenColor' : ''}>
+                            <div className={item.colorSelected === key ? 'chosenColor' : ''} key={color}>
                               <div
                                 className="Productcolor"
                                 style={{ backgroundColor: color.value }}
@@ -117,6 +114,7 @@ class Cart extends Component {
                   <div className="imageAndButton">
                     <div className="Add_product">
                       <button
+                        type="button"
                         className="btn1"
                         onClick={() => this.props.changeNumberInCart('plus', item)}
                       >
@@ -124,6 +122,7 @@ class Cart extends Component {
                       </button>
                       <p className="numberOfItems">{item.itemsNumber}</p>
                       <button
+                        type="button"
                         className="btn2"
                         onClick={() => this.props.changeNumberInCart('moins', item)}
                       >
@@ -134,12 +133,14 @@ class Cart extends Component {
                       <img src={item.gallery[item.imagesDisplay]} alt="" className="cartImg" />
                       <div className="switchButtons">
                         <button
+                          type="button"
                           onClick={() => { this.props.changeImage('moins', item); }}
                         >
                           {'<'}
                         </button>
                         <button
-                          onClick={(event) => { this.props.changeImage('plus', item); }}
+                          type="button"
+                          onClick={() => { this.props.changeImage('plus', item); }}
                         >
                           {'>'}
                         </button>
@@ -152,7 +153,7 @@ class Cart extends Component {
         }
         <div className="TotalQuantity">
           <h3>
-            Tax 21%: 
+            Tax 21%:
             <span>
               {' '}
               {this.state.currencies[this.props.currencieId]}
@@ -161,7 +162,10 @@ class Cart extends Component {
           </h3>
           <h3>
             Quantity:
-            <span>{' '}{this.cartLength()}</span>
+            <span>
+              {' '}
+              {this.cartLength()}
+            </span>
           </h3>
           <h3>
             Total:
@@ -171,7 +175,7 @@ class Cart extends Component {
               {this.cartTotal().toFixed(2)}
             </span>
           </h3>
-          <button className="orderBtn">ORDER</button>
+          <button type="button" className="orderBtn">ORDER</button>
         </div>
       </div>
     );

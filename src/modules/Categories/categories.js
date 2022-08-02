@@ -5,24 +5,13 @@ import Item from './Item/Item';
 import '../../styles/Items.css';
 
 class Items extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: [],
-      popUpId1: '',
-      showProduct: false,
-      showCartPage: false,
-    };
-  }
-
   componentDidMount() {
-    if(this.props.allItems.length === 0){
+    if (this.props.allItems.length === 0) {
       this.props.fetchCategories();
     }
   }
 
   render() {
-
     return (
       <div className="showItems">
         <div
@@ -42,20 +31,15 @@ class Items extends Component {
         <div className="Items_container">
 
           { this.props.allItems.length > 0
-            ? this.props.allItems[this.props.filter].products.map((item, id) =>{
-              
-              return(
-                <Item
+            ? this.props.allItems[this.props.filter].products.map((item) => (
+              <Item
                 productId={this.props.details}
                 currencieId={this.props.currencieId}
                 storedInCart={item.storedInCart}
                 data={item}
-                key={id}
+                key={item.id}
               />
-              )
-
-            } 
-            ) : (<p>...fetching data</p>)}
+            )) : (<p>...fetching data</p>)}
         </div>
       </div>
     );

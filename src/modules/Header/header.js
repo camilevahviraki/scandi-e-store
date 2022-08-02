@@ -12,7 +12,6 @@ class Header extends Component {
     super(props);
     this.state = {
       activeLink: 0,
-      showMiniCArt: false,
     };
   }
 
@@ -25,16 +24,15 @@ class Header extends Component {
   }
 
   render() {
-
-    if(window.location.pathname.split('/').join('') === 'cart'){
+    if (window.location.pathname.split('/').join('') === 'cart') {
       this.props.showMiniCArt(false);
     }
-    
+
     return (
       <header>
         <nav className="nav">
-          <Link to={"../"}
-            
+          <Link
+            to="../"
             className={this.state.activeLink === 0 ? 'activeLink' : 'nonActiveLink'}
             onClick={() => {
               this.setState({ activeLink: 0 });
@@ -43,7 +41,8 @@ class Header extends Component {
           >
             All
           </Link>
-          <Link to={"../clothes"}
+          <Link
+            to="../clothes"
             className={this.state.activeLink === 1 ? 'activeLink' : 'nonActiveLink'}
             onClick={() => {
               this.setState({ activeLink: 1 });
@@ -52,7 +51,8 @@ class Header extends Component {
           >
             Clothes
           </Link>
-          <Link to={"../tech"}
+          <Link
+            to="../tech"
             className={this.state.activeLink === 2 ? 'activeLink' : 'nonActiveLink'}
             onClick={() => {
               this.setState({ activeLink: 2 });
@@ -78,9 +78,9 @@ class Header extends Component {
           className="cardEmpty"
           onClick={() => this.props.showMiniCArt(true)}
         />
-        
+
         <span
-          style={ this.cartLength() === 0?{display: 'none'}:{display: 'block'}}
+          style={this.cartLength() === 0 ? { display: 'none' } : { display: 'block' }}
           className="cartLength"
         >
           {this.cartLength()}
@@ -97,8 +97,4 @@ class Header extends Component {
 
 const mapStateToProps = (state) => ({ cart: state.cartReducer });
 
-const mapDispatchToProps = (dispatch) => ({
-  addTocard: '',
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, null)(Header);

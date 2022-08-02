@@ -9,27 +9,25 @@ class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showPoduct: false,
       imageShown: 0,
       colorSelected: 0,
       sizeSelected: 0,
-      productObj: null,
     };
   }
 
-  componentDidMount(){
-    if(this.props.productId !== null){
+  componentDidMount() {
+    if (this.props.productId !== null) {
       this.props.fetchProduct(this.props.productId);
       localStorage.setItem('detail_id', this.props.productId);
-    }else{
-      this.props.fetchProduct(localStorage.getItem('detail_id'))
+    } else {
+      this.props.fetchProduct(localStorage.getItem('detail_id'));
     }
   }
 
-  componentDidUpdate(prevProps){
-    if(this.props.product !== prevProps.product){
-      if(this.props.product !== null){
-        localStorage.setItem('product', JSON.stringify(this.props.product))
+  componentDidUpdate(prevProps) {
+    if (this.props.product !== prevProps.product) {
+      if (this.props.product !== null) {
+        localStorage.setItem('product', JSON.stringify(this.props.product));
         this.saveToStorage(this.props.product.product);
       }
     }
@@ -54,14 +52,14 @@ class Product extends Component {
         cartProduct = { ...cartProduct, colorSelected };
         cartProduct = { ...cartProduct, sizeSelected };
         localStorage.setItem('productToCheck', JSON.stringify(cartProduct));
-      } 
+      }
 
       render() {
         let sizeProduct = [];
         let colorProduct = [];
-           
+
         const newProduct = this.props.product.product;
-        
+
         if (newProduct !== undefined) {
           if (newProduct.attributes.length > 1) {
             colorProduct = newProduct.attributes.filter((size) => size.name === 'Color');
@@ -107,6 +105,7 @@ class Product extends Component {
                       {
                   sizeProduct[0].items.map((size, key) => (
                     <p
+                      key={size}
                       onClick={() => {
                         this.setState({ sizeSelected: key });
                         this.saveToStorage(newProduct, this.state.colorSelected, key);
@@ -127,10 +126,11 @@ class Product extends Component {
                     {
                    colorProduct[0].items.map((color, key) => (
                      <div
+                       key={color}
                        onClick={() => {
-                          this.setState({ colorSelected: key });
-                          this.saveToStorage(newProduct, key, this.state.sizeSelected);
-                        }}
+                         this.setState({ colorSelected: key });
+                         this.saveToStorage(newProduct, key, this.state.sizeSelected);
+                       }}
                        className={this.state.colorSelected === key ? 'chosenColor' : 'Productcolor'}
                        style={{ backgroundColor: color.value }}
                      />
@@ -140,13 +140,14 @@ class Product extends Component {
                 )
                   : (<></>)
                }
-                <p 
+                <p
                   className="detailsPrice"
                 >
                   {newProduct.prices[this.props.currencieId].currency.symbol}
                   {newProduct.prices[this.props.currencieId].amount}
                 </p>
                 <button
+                  type="button"
                   className="add_to_cart"
                   onClick={() => this.addNewToCart(newProduct)}
                 >
