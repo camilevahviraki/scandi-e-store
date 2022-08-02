@@ -5,11 +5,11 @@
 }
 
 .nav button {
+  font-family: 'Raleway', sans-serif;
   margin-right: 30px;
   padding-left: 7px;
   padding-right: 7px;
   height: 78px;
-  font-family: 'Raleway';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -55,12 +55,11 @@ header {
   border: none;
   color: #1d1f22;
   text-decoration: none;
-  font-family: 'Raleway';
+  font-family: 'Raleway', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   text-transform: uppercase;
-  color: #1d1f22;
   padding: 32px 0;
   margin-right: 32px;
 }

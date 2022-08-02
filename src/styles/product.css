@@ -88,8 +88,6 @@
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 159.96%;
-  color: #1d1f22;
 }
 
 .text-Description ul {
@@ -133,13 +131,5 @@
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
-  color: #1d1f22;
-}
-
-.text-Description {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
   color: #1d1f22;
 }
