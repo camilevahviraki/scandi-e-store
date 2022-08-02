@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { URL, getProduct } from '../queries/queries';
+import { URL } from '../queries/queries';
 
 const FETCH_PRODUCT = 'scandiweb-app/src/redux/FETCH_PRODUCT';
 
 const productReducer = (state = {}, action) => {
   switch (action.type) {
-    case FETCH_PRODUCT:{
+    case FETCH_PRODUCT: {
       return action.product;
     }
     default:
