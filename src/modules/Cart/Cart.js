@@ -131,7 +131,7 @@ class Cart extends Component {
                     </div>
                     <div className="cartImgContainer">
                       <img src={item.gallery[item.imagesDisplay]} alt="" className="cartImg" />
-                      <div className="switchButtons">
+                      <div className="switchButtons" style={item.gallery.length === 1 ? { display: 'none' } : { display: 'flex' }}>
                         <button
                           type="button"
                           onClick={() => { this.props.changeImage('moins', item); }}
