@@ -68,7 +68,6 @@ const categoryReducer = (state = [], action) => {
         { name: 'clothes', products: newClothes },
         { name: 'tech', products: newTech },
       ];
-      console.log('product to store =>', dataToStore);
 
       return dataToStore;
     }
