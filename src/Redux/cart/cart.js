@@ -8,13 +8,17 @@ const cartReducer = (state = [], action) => {
       let duplicate = [];
       let stateIfDuplicate = [];
       state.forEach((item) => {
-        if (action.product.id === item.id && action.product.colorSelected === item.colorSelected && action.product.sizeSelected === item.sizeSelected) {
+        if (action.product.id === item.id
+           && action.product.colorSelected === item.colorSelected
+           && action.product.sizeSelected === item.sizeSelected) {
           duplicate = [...duplicate, item];
         }
       });
       if (duplicate.length > 0) {
         state.forEach((item) => {
-          if (action.product.id === item.id && action.product.colorSelected === item.colorSelected && action.product.sizeSelected === item.sizeSelected) {
+          if (action.product.id === item.id
+              && action.product.colorSelected === item.colorSelected
+              && action.product.sizeSelected === item.sizeSelected) {
             item.itemsNumber += 1;
           }
           stateIfDuplicate = [...stateIfDuplicate, item];
@@ -35,7 +39,9 @@ const cartReducer = (state = [], action) => {
       const itemBtn = action.data.btn;
       let newState = [];
       state.forEach((item) => {
-        if (item.name === itemName.name && item.colorSelected === itemName.colorSelected && item.sizeSelected === itemName.sizeSelected) {
+        if (item.name === itemName.name
+            && item.colorSelected === itemName.colorSelected
+            && item.sizeSelected === itemName.sizeSelected) {
           if (itemBtn === 'plus') {
             if (item.imagesDisplay >= item.gallery.length - 1) {
               item.imagesDisplay = 0;
@@ -60,7 +66,9 @@ const cartReducer = (state = [], action) => {
       const itemBtn = action.data.btn;
       let newState = [];
       state.forEach((item) => {
-        if (item.name === itemName.name && item.colorSelected === itemName.colorSelected && item.sizeSelected === itemName.sizeSelected) {
+        if (item.name === itemName.name
+           && item.colorSelected === itemName.colorSelected
+           && item.sizeSelected === itemName.sizeSelected) {
           if (itemBtn === 'plus') {
             item.itemsNumber += 1;
           } else if (itemBtn === 'moins') {
@@ -74,21 +82,23 @@ const cartReducer = (state = [], action) => {
         newState = [...newState, item];
       });
       const stateToStore = newState.filter((item) => item.itemsNumber !== 0);
-      localStorage.setItem('cart', JSON.stringify(stateToStore))
+      localStorage.setItem('cart', JSON.stringify(stateToStore));
       return stateToStore;
     }
     default: {
       const stored = JSON.parse(localStorage.getItem('cart'));
-      if(stored){
-        return stored
+      if (stored) {
+        return stored;
       }
       localStorage.setItem('cart', JSON.stringify([]));
       return state;
-    }  
+    }
   }
 };
 
-export const changeNumberInCart = (btn, item) => ({ type: CHANGE_NUMBER_IN_CART, data: { btn, item } });
+export const changeNumberInCart = (btn, item) => (
+  { type: CHANGE_NUMBER_IN_CART, data: { btn, item } }
+);
 
 export const changeImage = (btn, item) => ({ type: CHANGE_IMAGE, data: { btn, item } });
 
