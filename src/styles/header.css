@@ -1,92 +1,92 @@
 .nav {
-    display: flex;
-    align-items: center;
-    margin-left: 115px;
+  display: flex;
+  align-items: center;
+  margin-left: 115px;
 }
 
 .nav button {
-    margin-right: 30px;
-    padding-left: 7px;
-    padding-right: 7px;
-    height: 78px;
-font-family: 'Raleway';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-text-transform: uppercase;
-background-color: transparent;
+  margin-right: 30px;
+  padding-left: 7px;
+  padding-right: 7px;
+  height: 78px;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: uppercase;
+  background-color: transparent;
 }
 
 header {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    position: absolute;
-    top: 0;
-    width: 100vw;
-    height: 78px;
-    z-index: 10;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 78px;
+  z-index: 10;
 }
 
 .logo {
-    position: absolute;
-    left: calc(50vw - 20px);
+  position: absolute;
+  left: calc(50vw - 20px);
 }
 
 .cardEmpty {
-    position: absolute;
-    right: 115px;
+  position: absolute;
+  right: 115px;
 }
 
 .activeLink {
-    color: #5ECE7B;
-    border-bottom: 1px solid #5ECE7B;
-    text-decoration: none;
-    font-family: 'Raleway', sans-serif;
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-text-transform: uppercase;
-padding: 32px 0;
-margin-right: 32px;
+  color: #5ece7b;
+  border-bottom: 1px solid #5ece7b;
+  text-decoration: none;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 32px 0;
+  margin-right: 32px;
 }
 
 .nonActiveLink {
-    border: none;
-    color: #1D1F22;
-    text-decoration: none;
-    font-family: 'Raleway';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-text-transform: uppercase;
-color: #1D1F22;
-padding: 32px 0;
-margin-right: 32px;
+  border: none;
+  color: #1d1f22;
+  text-decoration: none;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #1d1f22;
+  padding: 32px 0;
+  margin-right: 32px;
 }
 
 .currencies {
-    position: absolute;
-    right: 143px;
-    border: none;
-    background-color: white;
-    font-family: 'Raleway', sans-serif;
-font-style: normal;
-font-weight: 500;
-font-size: 18px;
+  position: absolute;
+  right: 143px;
+  border: none;
+  background-color: white;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .cartLength {
-    position: absolute;
-    right: 98px;
-    top: 20px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: black;
-    color: white;
-    font-size: 14px;
-    padding: 2px 1px 1px 1px;
-    font-weight: 700;
-    text-align: center;
+  position: absolute;
+  right: 98px;
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  padding: 2px 1px 1px 1px;
+  font-weight: 700;
+  text-align: center;
 }
