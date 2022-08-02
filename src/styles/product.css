@@ -123,6 +123,7 @@
   font-size: 30px;
   color: #1d1f22;
   margin: 12px 0 8px 0;
+  width: max-content;
 }
 
 .detailsPrice {
