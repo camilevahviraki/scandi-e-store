@@ -12,6 +12,12 @@ export default class Item extends Component {
         <div className="image-container" onClick={() => this.props.productId(item.id)}>
           <Link to="../details">
             <img className="Item-Img" src={item.gallery[0]} alt="" />
+            <h2
+              style={item.inStock ? { display: 'flex' } : { display: 'none' }}
+              className="out_of_stock"
+            >
+              OUT OF STOCK
+            </h2>
           </Link>
         </div>
         <h3 className="artcicleName">
