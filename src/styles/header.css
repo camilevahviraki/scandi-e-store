@@ -40,7 +40,7 @@ header {
 
 .activeLink {
   color: #5ece7b;
-  border-bottom: 1px solid #5ece7b;
+  border-bottom: 2px solid #5ece7b;
   text-decoration: none;
   font-family: 'Raleway', sans-serif;
   font-style: normal;
@@ -62,17 +62,6 @@ header {
   text-transform: uppercase;
   padding: 32px 0;
   margin-right: 32px;
-}
-
-.currencies {
-  position: absolute;
-  right: 143px;
-  border: none;
-  background-color: white;
-  font-family: 'Raleway', sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
 }
 
 .cartLength {

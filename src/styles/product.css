@@ -33,7 +33,9 @@
 }
 
 .bigImage {
-  width: 600px;
+  max-width: 600px;
+  max-height: 100%;
+  width: auto;
   height: auto;
 }
 
@@ -103,6 +105,7 @@
   line-height: 18px;
   color: #1d1f22;
   margin: 33px 0 8px 0;
+  text-transform: uppercase;
 }
 
 #titleBrand {
@@ -134,4 +137,9 @@
   font-weight: 700;
   font-size: 24px;
   color: #1d1f22;
+}
+
+#message {
+  color: #5ece7b;
+  font-family: 'Raleway', sans-serif;
 }

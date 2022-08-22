@@ -15,7 +15,7 @@
 .cardElement {
   position: relative;
   display: flex;
-  height: 336px;
+  min-height: 336px;
   width: calc(100vw - 200px);
   border-bottom: 1px solid #e5e5e5;
   align-items: center;
@@ -105,6 +105,7 @@
   color: #1d1f22;
   text-align: start;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .container_sizes {
@@ -180,8 +181,9 @@
 
 .numberOfItems {
   width: 100%;
-  margin-top: 138px;
+  margin-top: 133px;
   font-size: 24px;
+  text-align: center;
 }
 
 .TotalQuantity {

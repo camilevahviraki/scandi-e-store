@@ -1,0 +1,60 @@
+.choose-currency {
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    position: absolute;
+    right: 140px;
+    padding: 0 5px;
+    display: flex;
+}
+
+.currencies-wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.currencies {
+    position: absolute;
+    right: 78px;
+    top: 65px;
+    border: none;
+    background-color: white;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    flex-direction: column;
+    width: 114px;
+    box-shadow: 1px 1px 30px rgba(209, 210, 211, 0.219);
+}
+
+.selected-currency {
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: #eee;
+    padding: 13.5px 0 13.5px 20px;
+    margin: 0;
+}
+
+.unselsected-curr {
+    margin: 0;
+    padding: 22px 0 22px 20px;
+    font-family: 'Raleway', sans-serif;
+    background-color: white;
+}
+
+.arrow {
+    height: 3px;
+    width: 6px;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.arrow-down {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}

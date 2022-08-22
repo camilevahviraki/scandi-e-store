@@ -26,9 +26,12 @@
 }
 
 .Item-Img {
-  width: calc(100% - 32px);
+  max-width: calc(100% - 32px);
   height: auto;
+  width: auto;
+  max-height: 100%;
   margin-left: 16px;
+  align-self: center;
 }
 
 .image-container {
@@ -49,6 +52,7 @@
   color: #1d1f22;
   margin-bottom: 103px;
   margin-top: 0;
+  text-transform: capitalize;
 }
 
 .artcicleName {
@@ -104,4 +108,17 @@
 .article-stored {
   background-color: #fff;
   box-shadow: 0 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+.out_of_stock {
+  position: absolute;
+font-family: 'Raleway', sans-serif;
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+color: #8D8F9A;
+top: 151px;
+text-align: center;
+width: 173px;
+margin-left: calc(50% - 86px);
 }
