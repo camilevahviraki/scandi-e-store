@@ -24,7 +24,10 @@ class Currency extends Component {
 
         <div
           className="choose-currency"
-          onClick={() => this.setState({ showCurrency: !this.state.showCurrency })}
+          onClick={() => {
+            this.setState({ showCurrency: !this.state.showCurrency });
+            this.props.minicart(false);
+          }}
         >
           {' '}
           {

@@ -58,7 +58,7 @@ class Header extends Component {
             this.props.changeFilter();
           }}
         />
-        <Currency selectCurrency={this.props.selectCurrency} />
+        <Currency selectCurrency={this.props.selectCurrency} minicart={this.props.showMiniCArt} />
         <img
           src={emptyCart}
           alt=""
