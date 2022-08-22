@@ -10,7 +10,9 @@ const cartReducer = (state = [], action) => {
       state.forEach((item) => {
         if (action.product.id === item.id
            && action.product.colorSelected === item.colorSelected
-           && action.product.sizeSelected === item.sizeSelected) {
+           && action.product.sizeSelected0 === item.sizeSelected0
+           && action.product.sizeSelected1 === item.sizeSelected1
+           && action.product.sizeSelected2 === item.sizeSelected2) {
           duplicate = [...duplicate, item];
         }
       });
@@ -18,7 +20,9 @@ const cartReducer = (state = [], action) => {
         state.forEach((item) => {
           if (action.product.id === item.id
               && action.product.colorSelected === item.colorSelected
-              && action.product.sizeSelected === item.sizeSelected) {
+              && action.product.sizeSelected0 === item.sizeSelected0
+              && action.product.sizeSelected1 === item.sizeSelected1
+              && action.product.sizeSelected2 === item.sizeSelected2) {
             item.itemsNumber += 1;
           }
           stateIfDuplicate = [...stateIfDuplicate, item];
@@ -39,9 +43,7 @@ const cartReducer = (state = [], action) => {
       const itemBtn = action.data.btn;
       let newState = [];
       state.forEach((item) => {
-        if (item.name === itemName.name
-            && item.colorSelected === itemName.colorSelected
-            && item.sizeSelected === itemName.sizeSelected) {
+        if (item === itemName) {
           if (itemBtn === 'plus') {
             if (item.imagesDisplay >= item.gallery.length - 1) {
               item.imagesDisplay = 0;
@@ -66,9 +68,7 @@ const cartReducer = (state = [], action) => {
       const itemBtn = action.data.btn;
       let newState = [];
       state.forEach((item) => {
-        if (item.name === itemName.name
-           && item.colorSelected === itemName.colorSelected
-           && item.sizeSelected === itemName.sizeSelected) {
+        if (item === itemName) {
           if (itemBtn === 'plus') {
             item.itemsNumber += 1;
           } else if (itemBtn === 'moins') {
