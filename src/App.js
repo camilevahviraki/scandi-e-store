@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import Items from './modules/Categories/categories';
+import { connect } from 'react-redux';
+import Items from './modules/Category/category';
 import Cart from './modules/Cart/Cart';
 import Header from './modules/Header/header';
 import Product from './modules/Details/product';
-import store from './Redux/Store';
+import { fetchCategories } from './Redux/categories/categories';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +14,12 @@ class App extends Component {
       currencieId: 0,
       showMiniCArt: false,
       productId: null,
+      descriptionLink: null,
     };
+  }
+
+  componentDidMount() {
+    this.props.fetchCategories();
   }
 
   changHeaderLink = () => {
@@ -23,21 +28,8 @@ class App extends Component {
     });
   }
 
-  selectCurrency = (e) => {
-    switch (e.target.value) {
-      case 'USD':
-        return this.setState({ currencieId: 0 });
-      case 'GBP':
-        return this.setState({ currencieId: 1 });
-      case 'AUD':
-        return this.setState({ currencieId: 2 });
-      case 'JPY':
-        return this.setState({ currencieId: 3 });
-      case 'RUB':
-        return this.setState({ currencieId: 4 });
-      default:
-        return this.setState({ currencieId: 0 });
-    }
+  selectCurrency = (id) => {
+    this.setState({ currencieId: id });
   }
 
   seeDetails = (id) => {
@@ -48,79 +40,87 @@ class App extends Component {
     this.setState({ showMiniCArt: bool });
   }
 
+  setDescriptionLink = (link) => {
+    this.setState({ descriptionLink: link });
+    localStorage.setItem('descriptionLink', link);
+  }
+
   render() {
+    const savedLink = localStorage.getItem('descriptionLink');
     return (
-      <Provider store={store}>
-        <BrowserRouter>
-          <Header
-            changeFilter={this.changHeaderLink}
-            selectCurrency={this.selectCurrency}
-            currencieId={this.state.currencieId}
-            cartShown={this.state.showMiniCArt}
-            showMiniCArt={this.showMiniCArt}
+
+      <BrowserRouter>
+        <Header
+          changeFilter={this.changHeaderLink}
+          selectCurrency={this.selectCurrency}
+          currencieId={this.state.currencieId}
+          cartShown={this.state.showMiniCArt}
+          showMiniCArt={this.showMiniCArt}
+        />
+        <Routes>
+          <Route
+            path="/"
+            element={(
+              <Items
+                filter=""
+                currencieId={this.state.currencieId}
+                grayFilter={this.state.showMiniCArt}
+                hideMiniCart={this.showMiniCArt}
+                details={this.seeDetails}
+                setDescriptionLink={this.props.setDescriptionLink}
+              />
+        )}
           />
-          <Routes>
-            <Route
-              path="/"
-              element={(
-                <Items
-                  filter={0}
-                  currencieId={this.state.currencieId}
-                  grayFilter={this.state.showMiniCArt}
-                  hideMiniCart={this.showMiniCArt}
-                  details={this.seeDetails}
-                />
-        )}
-            />
-            <Route
-              path="/clothes"
-              element={(
-                <Items
-                  filter={1}
-                  currencieId={this.state.currencieId}
-                  grayFilter={this.state.showMiniCArt}
-                  hideMiniCart={this.showMiniCArt}
-                  details={this.seeDetails}
-                />
-        )}
-            />
-            <Route
-              path="/tech"
-              element={(
-                <Items
-                  filter={2}
-                  currencieId={this.state.currencieId}
-                  grayFilter={this.state.showMiniCArt}
-                  hideMiniCart={this.showMiniCArt}
-                  details={this.seeDetails}
-                />
-        )}
-            />
-            <Route
-              path="details"
-              element={(
-                <Product
-                  productId={this.state.productId}
-                  currencieId={this.state.currencieId}
-                  showMiniCArt={this.showMiniCArt}
-                  grayFilter={this.state.showMiniCArt}
-                />
+          {
+              this.props.allItems.length > 0
+                ? this.props.allItems.map((item) => (
+                  <Route
+                    key={item.name}
+                    path={item.name}
+                    element={(
+                      <Items
+                        filter={item.name}
+                        currencieId={this.state.currencieId}
+                        grayFilter={this.state.showMiniCArt}
+                        hideMiniCart={this.showMiniCArt}
+                        details={this.seeDetails}
+                        setDescriptionLink={this.setDescriptionLink}
+                      />
+                  )}
+                  />
+                ))
+                : ''
+            }
+
+          <Route
+            path={this.state.descriptionLink ? this.state.descriptionLink : savedLink}
+            element={(
+              <Product
+                productId={this.state.productId}
+                currencieId={this.state.currencieId}
+                showMiniCArt={this.showMiniCArt}
+                grayFilter={this.state.showMiniCArt}
+              />
                 )}
-            />
-            <Route
-              path="/cart"
-              element={(
-                <Cart
-                  currencieId={this.state.currencieId}
-                  cartShown={this.showMiniCArt}
-                />
+          />
+          <Route
+            path="/cart"
+            element={(
+              <Cart
+                currencieId={this.state.currencieId}
+                cartShown={this.showMiniCArt}
+              />
 )}
-            />
-          </Routes>
-        </BrowserRouter>
-      </Provider>
+          />
+        </Routes>
+      </BrowserRouter>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({ allItems: state.categoriesReducer });
+const mapDispatch = (dispatch) => ({
+  fetchCategories: () => dispatch(fetchCategories()),
+});
+
+export default connect(mapStateToProps, mapDispatch)(App);
