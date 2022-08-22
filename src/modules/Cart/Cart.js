@@ -8,7 +8,6 @@ class Cart extends Component {
     super(props);
     this.state = {
       imageShown: 0,
-      currencies: ['$', '£', 'A$', '¥', '₽'],
     };
   }
 
@@ -76,27 +75,38 @@ class Cart extends Component {
                     <h4 className="card_name">{item.name}</h4>
                     <p className="card_price">
                       {item.prices[this.props.currencieId].currency.symbol}
-                      {item.prices[this.props.currencieId].amount}
+                      {item.prices[this.props.currencieId].amount.toFixed(2)}
                     </p>
-                    {sizeProduct.length > 0 ? (<p className="card_size">SIZE:</p>) : (<></>)}
 
                     {sizeProduct.length > 0
-                      ? (
-                        <div className="container_sizes">
-                          {
-                            sizeProduct[0].items.map((size, key) => (
-                              <p key={size} className={item.sizeSelected === key ? 'chosenSize' : 'productSize'}>{size.value}</p>
+                      ? sizeProduct.map((attribute, i) => (
+                        <>
+                          <p className="card_size">
+                            {attribute.id}
+                            :
+                          </p>
+                          <div className="container_sizes">
+
+                            {
+                            attribute.items.map((size, key) => (
+                              <p key={size} className={item[`sizeSelected${i}`] === key ? 'chosenSize' : 'productSize'}>{size.value}</p>
                             ))
                           }
-                        </div>
-                      ) : ''}
-                    {colorProduct.length > 0 ? (<p className="card_size">COLOR:</p>) : (<></>)}
+                          </div>
+                        </>
+                      ))
+                      : ''}
 
                     {
                           colorProduct.length > 0
                             ? (
-                              <div className="container_colors">
-                                {
+                              <>
+                                <p className="card_size">
+                                  {colorProduct[0].id}
+                                  :
+                                </p>
+                                <div className="container_colors">
+                                  {
                           colorProduct[0].items.map((color, key) => (
                             <div className={item.colorSelected === key ? 'chosenColor' : ''} key={color}>
                               <div
@@ -106,7 +116,8 @@ class Cart extends Component {
                             </div>
                           ))
                          }
-                              </div>
+                                </div>
+                              </>
                             )
                             : (<></>)
                         }
@@ -154,11 +165,15 @@ class Cart extends Component {
         <div className="TotalQuantity">
           <h3>
             Tax 21%:
-            <span>
-              {' '}
-              {this.state.currencies[this.props.currencieId]}
-              {(this.cartTotal() * 0.21).toFixed(2)}
-            </span>
+            {this.props.currencies.length > 0
+              ? (
+                <span>
+                  {' '}
+                  {this.props.currencies[this.props.currencieId].symbol}
+                  {(this.cartTotal() * 0.21).toFixed(2)}
+                </span>
+              )
+              : (<></>)}
           </h3>
           <h3>
             Quantity:
@@ -169,11 +184,15 @@ class Cart extends Component {
           </h3>
           <h3>
             Total:
-            <span>
-              {' '}
-              {this.state.currencies[this.props.currencieId]}
-              {this.cartTotal().toFixed(2)}
-            </span>
+            {this.props.currencies.length > 0
+              ? (
+                <span>
+                  {' '}
+                  {this.props.currencies[this.props.currencieId].symbol}
+                  {this.cartTotal().toFixed(2)}
+                </span>
+              )
+              : (<></>)}
           </h3>
           <button type="button" className="orderBtn">ORDER</button>
         </div>
@@ -182,7 +201,11 @@ class Cart extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ cart: state.cartReducer });
+const mapStateToProps = (state) => (
+  {
+    cart: state.cartReducer,
+    currencies: state.currenciesReducer,
+  });
 
 const mapDispatchToProps = (dispatch) => ({
   changeImage: (btn, item) => dispatch(changeImage(btn, item)),
