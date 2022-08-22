@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import emptyCart from '../../icons/Empty Cart.png';
 import logo from '../../icons/logo transparent.png';
-import Currencie from './Currencies';
+import Currency from './Currencies';
 import Minicart from './minicart';
 import '../../styles/header.css';
 
@@ -31,36 +31,23 @@ class Header extends Component {
     return (
       <header>
         <nav className="nav">
-          <Link
-            to="../"
-            className={this.state.activeLink === 0 ? 'activeLink' : 'nonActiveLink'}
-            onClick={() => {
-              this.setState({ activeLink: 0 });
-              this.props.changeFilter();
-            }}
-          >
-            All
-          </Link>
-          <Link
-            to="../clothes"
-            className={this.state.activeLink === 1 ? 'activeLink' : 'nonActiveLink'}
-            onClick={() => {
-              this.setState({ activeLink: 1 });
-              this.props.changeFilter();
-            }}
-          >
-            Clothes
-          </Link>
-          <Link
-            to="../tech"
-            className={this.state.activeLink === 2 ? 'activeLink' : 'nonActiveLink'}
-            onClick={() => {
-              this.setState({ activeLink: 2 });
-              this.props.changeFilter();
-            }}
-          >
-            Tech
-          </Link>
+          {
+            this.props.allItems.length > 0
+              ? this.props.allItems.map((item, key) => (
+                <Link
+                  key={item.name}
+                  to={`../${item.name}`}
+                  className={this.state.activeLink === key ? 'activeLink' : 'nonActiveLink'}
+                  onClick={() => {
+                    this.setState({ activeLink: key });
+                    this.props.changeFilter();
+                  }}
+                >
+                  {item.name}
+                </Link>
+              ))
+              : ''
+          }
         </nav>
         <img
           src={logo}
@@ -71,7 +58,7 @@ class Header extends Component {
             this.props.changeFilter();
           }}
         />
-        <Currencie selectCurrency={this.props.selectCurrency} />
+        <Currency selectCurrency={this.props.selectCurrency} />
         <img
           src={emptyCart}
           alt=""
@@ -95,6 +82,6 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ cart: state.cartReducer });
+const mapStateToProps = (state) => ({ cart: state.cartReducer, allItems: state.categoriesReducer });
 
 export default connect(mapStateToProps, null)(Header);
