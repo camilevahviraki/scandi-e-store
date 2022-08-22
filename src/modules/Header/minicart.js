@@ -3,32 +3,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changeImage, changeNumberInCart, addTocard } from '../../Redux/cart/cart';
 import '../../styles/miniCart.css';
-import scrollUp from '../../icons/scroll-btn.png';
 
 class MiniCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
       imageShown: 0,
-      currencies: ['$', '£', 'A$', '¥', '₽'],
       hoverCart: false,
-      visible: {
-        downLimit: this.props.cart.length - 2,
-        upLimit: this.props.cart.length,
-      },
     };
     this.myRef = createRef();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.cart.length !== prevProps.cart.length) {
-      this.setState({
-        visible: {
-          upLimit: this.props.cart.length,
-          downLimit: this.props.cart.length - 2,
-        },
-      });
-    }
   }
 
   setImageN = (arr) => {
@@ -65,55 +48,13 @@ class MiniCart extends Component {
     return cartTotal;
   }
 
-  setVisibleCart = (btn) => {
-    if (this.props.cart.length <= 2) {
-      this.setState({
-        visible: {
-          downLimit: 0,
-          upLimit: this.props.cart.length,
-        },
-      });
-    } else if (this.props.cart.length > 2) {
-      if (btn === 'up-btn') {
-        if (this.state.visible.upLimit + 2 >= this.props.cart.length) {
-          this.setState({
-            visible: {
-              downLimit: this.props.cart.length - 2,
-              upLimit: this.props.cart.length,
-            },
-          });
-        } else {
-          this.setState({
-            visible: {
-              downLimit: this.state.visible.downLimit + 2,
-              upLimit: this.state.visible.upLimit + 2,
-            },
-          });
-        }
-      } else if (btn === 'down-btn') {
-        if (this.state.visible.downLimit - 2 <= 0) {
-          this.setState({
-            visible: {
-              downLimit: 0,
-              upLimit: 2,
-            },
-          });
-        } else {
-          this.setState({
-            visible: {
-              downLimit: this.state.visible.downLimit - 2,
-              upLimit: this.state.visible.upLimit - 2,
-            },
-          });
-        }
-      }
-    }
-  }
-
   addTocart = () => {
-    if (window.location.pathname.split('/').join('') === 'details') {
+    const detailsLink = localStorage.getItem('descriptionLink');
+    if (window.location.pathname.split('/').join('') === detailsLink.split('/').join('')) {
       const item = JSON.parse(localStorage.getItem('productToCheck'));
-      this.props.addTocard(item);
+      if (item.inStock) {
+        this.props.addTocard(item);
+      }
     }
   }
 
@@ -130,16 +71,14 @@ class MiniCart extends Component {
             </span>
           </h2>
           <div
+            ref={this.myRef}
             onMouseOver={() => this.setState({ hoverCart: true })}
             onMouseLeave={() => this.setState({ hoverCart: false })}
             className={this.state.hoverCart ? 'articles-miniCart' : 'articles-miniCart  cartHover'}
           >
 
             {
-            this.props.cart.slice(
-              this.state.visible.downLimit,
-              this.state.visible.upLimit,
-            ).map((item) => {
+            this.props.cart.map((item) => {
               let sizeProduct = [];
               let colorProduct = [];
               const newProduct = item;
@@ -161,27 +100,36 @@ class MiniCart extends Component {
                     <h4 className="miniCard_name">{item.name}</h4>
                     <p className="miniCard_price">
                       {item.prices[this.props.currencieId].currency.symbol}
-                      {item.prices[this.props.currencieId].amount}
+                      {item.prices[this.props.currencieId].amount.toFixed(2)}
                     </p>
-                    {sizeProduct.length > 0 ? (<p className="miniCard_size">Size:</p>) : (<></>)}
 
                     {sizeProduct.length > 0
-                      ? (
-                        <div className="miniContainer_sizes">
-                          {
-                            sizeProduct[0].items.map((size, key) => (
-                              <p key={size} className={item.sizeSelected === key ? 'miniChosenSize' : 'miniProductSize'}>{size.value}</p>
+                      ? sizeProduct.map((attribute, id) => (
+                        <>
+                          <p className="miniCard_size">
+                            {attribute.name}
+                            :
+                          </p>
+                          <div className="miniContainer_sizes">
+                            {
+                            attribute.items.map((size, key) => (
+                              <p key={size} className={item[`sizeSelected${id}`] === key ? 'miniChosenSize' : 'miniProductSize'}>{size.value}</p>
                             ))
                           }
-                        </div>
-                      ) : ''}
-                    {colorProduct.length > 0 ? (<p className="miniCard_size">Color:</p>) : (<></>)}
+                          </div>
+                        </>
+                      )) : ''}
 
                     {
                           colorProduct.length > 0
                             ? (
-                              <div className="miniContainer_colors">
-                                {
+                              <>
+                                <p className="miniCard_size">
+                                  {colorProduct[0].id}
+                                  :
+                                </p>
+                                <div className="miniContainer_colors">
+                                  {
                           colorProduct[0].items.map((color, key) => (
                             <div key={color} className={item.colorSelected === key ? 'minChosenColor' : 'miniColor'}>
                               <div
@@ -191,7 +139,8 @@ class MiniCart extends Component {
                             </div>
                           ))
                          }
-                              </div>
+                                </div>
+                              </>
                             )
                             : (<></>)
                         }
@@ -201,7 +150,7 @@ class MiniCart extends Component {
                       <button
                         type="button"
                         className="mbtn1"
-                        onClick={() => this.props.changeNumberInCart('plus', item)}
+                        onClick={() => { this.props.changeNumberInCart('plus', item); }}
                       >
                         +
                       </button>
@@ -222,31 +171,20 @@ class MiniCart extends Component {
               );
             })
         }
-            <div style={this.state.hoverCart ? { display: 'flex' } : { display: 'none' }}>
-              <img
-                src={scrollUp}
-                alt=""
-                className="scrollUp"
-                onClick={() => { this.setVisibleCart('up-btn'); }}
-                style={this.state.visible.upLimit === this.props.cart.length ? { display: 'none' } : { display: 'flex' }}
-              />
-              <img
-                src={scrollUp}
-                alt=""
-                className="scrollDown"
-                onClick={() => { this.setVisibleCart('down-btn'); }}
-                style={this.state.visible.downLimit === 0 ? { display: 'none' } : { display: 'flex' }}
-              />
-            </div>
           </div>
 
           <div className="miniCartBottom">
             <div className="Total">
               <h3>Total:</h3>
-              <h3 className="titleTotal">
-                {this.state.currencies[this.props.currencieId]}
-                {this.cartTotal().toFixed(2)}
-              </h3>
+              {
+                this.props.currencies.length > 0
+                  ? (
+                    <h3 className="titleTotal">
+                      {this.props.currencies[this.props.currencieId].symbol}
+                      {this.cartTotal().toFixed(2)}
+                    </h3>
+                  ) : ''
+              }
             </div>
             <div className="buttonsCheckout">
 
@@ -272,12 +210,16 @@ class MiniCart extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ cart: state.cartReducer });
+const mapState = (state) => (
+  {
+    cart: state.cartReducer,
+    currencies: state.currenciesReducer,
+  });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatch = (dispatch) => ({
   changeImage: (btn, item) => dispatch(changeImage(btn, item)),
   changeNumberInCart: (btn, item) => dispatch(changeNumberInCart(btn, item)),
   addTocard: (item) => dispatch(addTocard(item)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MiniCart);
+export default connect(mapState, mapDispatch)(MiniCart);
