@@ -4,40 +4,14 @@ export const getCategories = `
 {
     categories {
       name
-      products {
-        id
-        name
-        inStock
-        gallery
-        description
-        category
-        attributes {
-          id
-          name
-          type
-          items {
-            displayValue
-            value
-            id
-          }
-        }
-        prices {
-          currency {
-            label
-            symbol
-          }
-          amount
-        }
-        brand
-      }
     }
   }
 `;
 
-export const getCategory = `
+export const getCategory = (name) => `
 {
     category (input: {
-        title: "all"
+        title: "${name}"
       }){
       name
       products {
@@ -70,42 +44,41 @@ export const getCategory = `
   }
 `;
 
-export const getProduct = `
-{
-    product(id: "huarache-x-stussy-le") {
-      id
-      name
-      inStock
-      gallery
-      description
-      category
-      attributes {
+export const getProduct = (id) => `
+  {
+      product(id: "${id}") {
         id
         name
-        type
-        items {
-          displayValue
-          value
+        inStock
+        gallery
+        description
+        category
+        attributes {
           id
+          name
+          type
+          items {
+            displayValue
+            value
+            id
+          }
         }
-      }
-      prices {
-        currency {
-          label
-          symbol
+        prices {
+          currency {
+            label
+            symbol
+          }
+          amount
         }
-        amount
+        brand
       }
-      brand
     }
-  }
-`;
+  `;
 
 export const getCurrencies = `
-{
-  currencies {
-    label
-    symbol
-  }
-}
-`;
+  {
+    currencies {
+      label
+      symbol
+    }
+  }`;
