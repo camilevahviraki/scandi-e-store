@@ -33,10 +33,13 @@
 }
 
 .bigImage {
+  display: block;
   max-width: 600px;
   max-height: 100%;
   width: auto;
   height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sideImages {
