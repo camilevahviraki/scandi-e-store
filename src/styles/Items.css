@@ -26,12 +26,13 @@
 }
 
 .Item-Img {
+  display: block;
   max-width: calc(100% - 32px);
   height: auto;
   width: auto;
   max-height: 100%;
-  margin-left: 16px;
-  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .image-container {
@@ -39,6 +40,10 @@
   height: 314px;
   overflow: hidden;
   padding-top: 16px;
+}
+
+.image-container a {
+  width: 100%;
 }
 
 .categoryName {
